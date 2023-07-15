@@ -1,8 +1,13 @@
 from urllib.parse import urlparse
 import json
+import os
 import psycopg2 as psycopg2
+from dotenv import load_dotenv
 
-result = urlparse("postgres://gvmrzsax:mIdwjpEt1B84eZYL53o7VP-J8Qr-AN1o@john.db.elephantsql.com/gvmrzsax")
+
+load_dotenv()
+db_url = os.environ.get('DB_URL')
+result = urlparse(db_url)
 username = result.username
 password = result.password
 database = result.path[1:]
