@@ -1,0 +1,43 @@
+@import "vars.less";
+
+
+html, body {
+    height: 100%;
+}
+
+html{
+    font-size: 15px;
+    scroll-behavior: smooth;
+}
+
+body{
+    margin: 0;
+    font-size: 1rem;
+    color: @black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(-60deg, #ff9966, #ff5e62, #ac1cb1c7, #6d1111);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    font-family: 'Roboto', sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+}
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+}
+
+/* Blocks import */
+@import "blocks/header.less";
+@import "blocks/footer.less";
+@import "blocks/nav.less";
+@import "blocks/user.less";
+@import "blocks/body.less";
