@@ -1,11 +1,13 @@
 <script lang="ts">
-    import Header from "../components/Header.svelte";
-    import Footer from "../components/Footer.svelte";
+    import Header from "../lib/components/Header.svelte";
+    import Footer from "../lib/components/Footer.svelte";
+    import * as css from "../../static/css/style.css";
 </script>
 
-<svelte:head>
-    <link rel="stylesheet" href="../css/style.css">
-</svelte:head>
 
-<slot />
+<Header />
+<main>
+    <slot />
+</main>
+<Footer />
 
