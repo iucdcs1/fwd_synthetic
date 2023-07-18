@@ -1,4 +1,3 @@
-<body>
     <div class="form-container">
         <h2>Register</h2>
         <form action="/register" method="post">
