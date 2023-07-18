@@ -2,7 +2,6 @@
 
 </script>
 
-<body>
     <div class="form-container">
         <h2>Register</h2>
         <form action="/register" method="post">
@@ -13,4 +12,3 @@
           <input type="submit" value="Register">
         </form>
       </div>
-</body>

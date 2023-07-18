@@ -2,10 +2,8 @@
 
 </script>
 
-<head>
-    <title>DB</title>
-</head>
-<body>
+
+
     <div class="form-container2">
         <h2>Enter DB URL (link)</h2>
         <form>
@@ -13,4 +11,3 @@
             <input type="submit" value="Proceed">
         </form>
         </div>
-</body>
