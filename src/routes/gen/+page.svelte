@@ -2,12 +2,12 @@
 
 </script>
 
-    <div class="form-container">
-        <h2>Amount</h2>
-        <form>
-            <text type="text" id="gen" name="gen"/>
+    <div class="amount__form-container">
+        <form class="amount__form">
+            <h2>Amount:</h2>
+            <input type="text" id="amount" name="amount" placeholder="Amount" required>
+        </form>
             <input type="submit" value="Confirm">
             <input type="submit" value="Cancel">
-        </form>
         
       </div>
