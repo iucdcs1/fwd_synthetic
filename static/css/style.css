@@ -223,7 +223,7 @@ footer .wave#wave4 {
   margin-left: 2rem;
   position: relative;
   font-size: 0.93rem;
-  color: #282A2C;
+  color: #fff;
   text-transform: uppercase;
   font-weight: 700;
   text-decoration: none;
@@ -246,7 +246,7 @@ footer .wave#wave4 {
 }
 .nav__link--btn {
   padding: 0.66rem 2rem;
-  border: 2px solid #282A2C;
+  border: 2px solid #fff;
   border-radius: 20px;
   transition: background-color 0.2s linear, color 0.1s linear;
 }
@@ -269,7 +269,7 @@ footer .wave#wave4 {
 .user__name {
   font-size: 1.06rem;
   line-height: 1.2rem;
-  color: #282A2C;
+  color: #fff;
   font-weight: 700;
   margin-bottom: 3px;
 }
@@ -278,7 +278,7 @@ footer .wave#wave4 {
 }
 .user__prof {
   font-size: 0.8rem;
-  color: rgba(40, 42, 44, 0.7);
+  color: rgba(255, 255, 255, 0.7);
 }
 @keyframes gradientBG {
   0% {
