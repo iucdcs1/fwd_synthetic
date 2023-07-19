@@ -1,21 +1,9 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import type { Args } from './interfaces';
-
-	export let data: Args;
-
-	onMount(async () => {
-		console.log('Connecting to the database using:', data.dbLink);
-	});
+	import type { FetchResult, FetchError } from './interfaces';
+	export let data: FetchResult | FetchError;
 </script>
 
 <div class="explore-container">
-	<h2 class="h2_body">Exploring Database</h2>
-	<p>Connecting to the database using: {data.dbLink}</p>
+	<!-- TODO: visualize the data -->
+	<h2>Exploring Database</h2>
 </div>
-
-<style>
-	.explore-container {
-		margin: 20px;
-	}
-</style>
