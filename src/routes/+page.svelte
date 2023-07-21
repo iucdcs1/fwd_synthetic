@@ -1,46 +1,38 @@
 <script lang="ts">
-  import { auth, createUserWithEmailAndPassword } from '../firebase';
-  import type { UserCredential } from 'firebase/auth';
-  import { getDatabase, ref, set } from 'firebase/database';
+  import { goto } from '$app/navigation';
+  import { createUserWithEmailAndPassword } from 'firebase/auth';
+  import { firebaseAuth } from '$lib/firebase';
 
-  let username: string = '';
-  let email: string = '';
-  let password: string = '';
-  let confirmPassword: string = '';
+  let email: string;
+  let password: string;
+  let success: boolean | undefined = undefined;
 
-  async function register(): Promise<void> {
-    try {
-      if (password !== confirmPassword) {
-        throw new Error("Passwords do not match");
-      }
+  const register = () => {
+     createUserWithEmailAndPassword(firebaseAuth, email, password)
+    .then((userCredentials) => {
+      console.log(userCredentials);
+    goto('/login');
+    })
+    .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage);
 
-      const response: UserCredential = await createUserWithEmailAndPassword(auth, email, password);
-
-      if (response.user) {
-        const user = response.user;
-        const database = getDatabase();
-        await set(ref(database, `users/${user.uid}`), {
-          displayName: username,
-        });
-      }
-
-      console.log(response);
-      // Registration successful, you can redirect or show a success message
-    } catch (error) {
-      console.error(error);
-      // Registration failed, you can show an error message
-    }
+    success = false;
+    });
   }
 </script>
     
-    
-    <div class="form-container">
-        <h2>Register</h2>
-        <form on:submit|preventDefault={register}>
-          <input type="text" bind:value={username} id="username" name="username" placeholder="Username" required>
-          <input type="email" bind:value={email} id="email" name="email" placeholder="Email" required>
-          <input type="password" bind:value={password} id="password" name="password" placeholder="Password" required>
-          <input type="password" bind:value={confirmPassword} id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
-          <input type="submit" value="Register">
-        </form>
-      </div>
+  <div class="form-container">
+      <form on:submit|preventDefault={register}>
+        <input type="email" placeholder="Email" class="px-4 py-2 border border-gray-300 rounded-md" required bind:value={email}/>
+
+        <input type="password" placeholder="Password" class="px-4 py-2 border border-gray-300 rounded-md" required bind:value={password}/>
+        
+        <button type="submit" class="default-action">Register</button>
+
+        {#if !success && success !== undefined}
+          <div class="p-8 text-red-500 bg-red-100">There was an error registering. Please try again.</div>
+        {/if}
+      </form>
+  </div>
