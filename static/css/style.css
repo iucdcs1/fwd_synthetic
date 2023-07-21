@@ -442,6 +442,7 @@ th {
 }
 td {
   border: 1px solid #ff5e62;
+  height: 40px;
 }
 .home__table {
   display: flex;
