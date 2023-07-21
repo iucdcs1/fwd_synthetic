@@ -1,0 +1,8 @@
+{
+    "tableName": [
+      "orders",
+      "products",
+      "categories",
+      "users"
+    ]
+}

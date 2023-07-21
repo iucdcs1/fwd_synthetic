@@ -409,9 +409,7 @@ li span {
 }
 .home__button {
   width: 200px;
-  padding: 15px;
-  margin-top: 320px;
-  margin-right: 900px;
+  height: 40px;
   background-color: #ff5e62;
   border: none;
   color: #fff;
@@ -419,4 +417,15 @@ li span {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   text-align: center;
+  position: absolute;
+  bottom: 20px;
+  right: 950px;
+}
+#home__listselect {
+  width: 200px;
+  height: 40px;
+  text-align: center;
+  border: 2px solid #ff5e62;
+  border-radius: 10px;
+  color: #000000;
 }
