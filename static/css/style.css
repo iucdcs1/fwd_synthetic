@@ -248,11 +248,13 @@ footer .wave#wave4 {
   padding: 0.66rem 2rem;
   border: 2px solid #fff;
   border-radius: 20px;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0);
   transition: background-color 0.2s linear, color 0.1s linear;
 }
 .nav__link--btn:hover {
-  background-color: #282A2C;
-  color: #fff;
+  background-color: rgba(255, 255, 255, 0.45);
+  color: #282A2C;
 }
 .user {
   display: flex;

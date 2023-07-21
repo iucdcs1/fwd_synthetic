@@ -1,10 +1,38 @@
-<div class="form-container">
-    <h2 class="h2_body">Register</h2>
-    <form action="/register" method="post">
-      <input type="text" id="username" name="username" placeholder="Username" required>
-      <input type="email" id="email" name="email" placeholder="Email" required>
-      <input type="password" id="password" name="password" placeholder="Password" required>
-      <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
-      <input type="submit" value="Register">
-    </form>
+<script lang="ts">
+  import { goto } from '$app/navigation';
+  import { createUserWithEmailAndPassword } from 'firebase/auth';
+  import { firebaseAuth } from '$lib/firebase';
+
+  let email: string;
+  let password: string;
+  let success: boolean | undefined = undefined;
+
+  const register = () => {
+     createUserWithEmailAndPassword(firebaseAuth, email, password)
+    .then((userCredentials) => {
+      console.log(userCredentials);
+    goto('/login');
+    })
+    .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    console.log(errorCode, errorMessage);
+
+    success = false;
+    });
+  }
+</script>
+    
+  <div class="form-container">
+      <form on:submit|preventDefault={register}>
+        <input type="email" placeholder="Email" class="px-4 py-2 border border-gray-300 rounded-md" required bind:value={email}/>
+
+        <input type="password" placeholder="Password" class="px-4 py-2 border border-gray-300 rounded-md" required bind:value={password}/>
+        
+        <button type="submit" class="default-action">Register</button>
+
+        {#if !success && success !== undefined}
+          <div class="p-8 text-red-500 bg-red-100">There was an error registering. Please try again.</div>
+        {/if}
+      </form>
   </div>
