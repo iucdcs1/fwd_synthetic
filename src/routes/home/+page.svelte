@@ -77,7 +77,8 @@
         </select>
     </div>
     {#if tableData}
-        <h3>{tableData.table_name}</h3>
+        <h3 class="home__tablename">{tableData.table_name}</h3>
+        <div class="home__table">
         <table>
             <thead>
             <tr>
@@ -108,8 +109,10 @@
             </tr>
             </tbody>
         </table>
+    </div>
     {:else}
         <p>No data available</p>
     {/if}
+    
     <button class="home__button">Gen</button>
 </div>

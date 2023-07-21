@@ -400,6 +400,7 @@ li span {
   padding: 40px;
   box-sizing: border-box;
   text-align: center;
+  justify-content: center;
 }
 .home__tabletext {
   color: #ff5e62;
@@ -426,4 +427,23 @@ li span {
   border: 2px solid #ff5e62;
   border-radius: 10px;
   color: #000000;
+}
+table {
+  border-collapse: collapse;
+  border-radius: 30px;
+  border: 3px solid #ff5e62;
+  width: 600px;
+  height: 200px;
+}
+th {
+  border: 1px solid #ff5e62;
+}
+td {
+  border: 1px solid #ff5e62;
+}
+.home__table {
+  display: flex;
+  padding-top: 30px;
+  justify-content: center;
+  align-items: center;
 }
