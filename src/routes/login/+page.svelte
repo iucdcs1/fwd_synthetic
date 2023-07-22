@@ -8,9 +8,9 @@
     goto('/about');
   }
 
-  let email: string;
-  let password: string;
-  let success: boolean | undefined = undefined;
+	let email: string;
+	let password: string;
+	let success: boolean | undefined = undefined;
 
   const login = () => {
     signInWithEmailAndPassword(firebaseAuth, email, password)
@@ -22,15 +22,20 @@
         const errorMessage = error.message;
         console.log(errorCode, errorMessage);
 
-        success = false;
-      });
-  };
+				success = false;
+			});
+	};
 </script>
-    
-    
-  <div class="form-container">
-      <form on:submit|preventDefault={login}>
-        <input type="email" placeholder="Email" class="px-4 py-2 border border-gray-300 rounded-md" required bind:value={email}/>
+
+<div class="form-container">
+	<form on:submit|preventDefault={login}>
+		<input
+			type="email"
+			placeholder="Email"
+			class="px-4 py-2 border border-gray-300 rounded-md"
+			required
+			bind:value={email}
+		/>
 
         <input type="password" placeholder="Password" class="px-4 py-2 border border-gray-300 rounded-md" required bind:value={password}/>
         
