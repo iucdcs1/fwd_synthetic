@@ -1,11 +1,11 @@
-import type { TableData } from "$lib/interface";
+import type { TableData } from '$lib/interface';
 
 export interface FetchError {
-    err: string;
-    detail: string;
+	err: string;
+	detail: string;
 }
 
 export interface FetchResult {
-    dbLink: string;
-    tables: TableData[];
+	dbLink: string;
+	tables: TableData[];
 }

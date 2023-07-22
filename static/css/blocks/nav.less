@@ -1,54 +1,52 @@
 // main: ../style.less
 
 .nav {
-    display: flex;
-    height: 100%;
-    align-items: center;
+	display: flex;
+	height: 100%;
+	align-items: center;
 }
 
 .nav__link {
-    margin-left: 2rem;
-    position: relative;
-    font-size: 0.93rem;
-    color: @white;
-    text-transform: uppercase;
-    font-weight: 700;   
-    text-decoration: none;
+	margin-left: 2rem;
+	position: relative;
+	font-size: 0.93rem;
+	color: @white;
+	text-transform: uppercase;
+	font-weight: 700;
+	text-decoration: none;
 
-    &:after {
-        content: "";
-        display: block;
-        width: 0px;
-        height: 2px;
-        background-color: @black;
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        z-index: 1;
+	&:after {
+		content: '';
+		display: block;
+		width: 0px;
+		height: 2px;
+		background-color: @black;
+		position: absolute;
+		bottom: -5px;
+		left: 0;
+		z-index: 1;
 
-        transition: width .2s linear;
-    }
+		transition: width 0.2s linear;
+	}
 
-    &:hover:not(.nav__link--btn) {
+	&:hover:not(.nav__link--btn) {
+		&::after {
+			width: 100%;
+		}
+	}
 
-        &::after {
-            width: 100%;
-        }
-    }
-    
-    /* Modificators */
-    &--btn {
-        padding: 0.66rem 2rem;
-        border: 2px solid @white;
-        border-radius: 20px;
-        color: @white;
-        background-color: rgba(255, 255, 255, 0%);
-        transition: background-color .2s linear, color .1s linear;
+	/* Modificators */
+	&--btn {
+		padding: 0.66rem 2rem;
+		border: 2px solid @white;
+		border-radius: 20px;
+		color: @white;
+		background-color: rgba(255, 255, 255, 0%);
+		transition: background-color 0.2s linear, color 0.1s linear;
 
-        &:hover {
-            background-color: rgba(255, 255, 255, 45%);
-            color: @black;
-
-        }
-    }
+		&:hover {
+			background-color: rgba(255, 255, 255, 45%);
+			color: @black;
+		}
+	}
 }
