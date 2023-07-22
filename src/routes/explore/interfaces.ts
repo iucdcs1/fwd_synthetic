@@ -1,4 +1,4 @@
-import type { TableInfo } from "../interfaces";
+import type { TableData } from "$lib/interface";
 
 export interface FetchError {
     err: string;
@@ -7,5 +7,5 @@ export interface FetchError {
 
 export interface FetchResult {
     dbLink: string;
-    tables: TableInfo[];
+    tables: TableData[];
 }
