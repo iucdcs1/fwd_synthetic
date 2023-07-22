@@ -1,16 +1,16 @@
-// src/routes/about/+page.ts
+// src/routes/result/+page.ts
 
-import { authUser } from '$lib/authStore';
 import { redirect } from '@sveltejs/kit';
+import session from '$lib/session';
+import { derived } from 'svelte/store';
+
+const isLoggedIn = derived(session, ($sessionStore) => !!$sessionStore.user);
+
 
 export const load = async () => {
-  const unsubscribe = authUser.subscribe((user) => {
-    if (!user) {
-      throw redirect(302, '/login');
-    }
-  });
-
-  unsubscribe();
-
-  return {};
+  if (!isLoggedIn) {
+    throw redirect(302, '/login');
+  }
+  
+    return {};
 };

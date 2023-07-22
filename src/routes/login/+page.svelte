@@ -2,7 +2,11 @@
   import { signInWithEmailAndPassword } from "firebase/auth";
   import { goto } from '$app/navigation';
   import { firebaseAuth } from '$lib/firebase';
-  import { authUser } from "$lib/authStore";
+  import { isLoggedIn } from '$lib/getAuthStatus';
+
+  if (isLoggedIn) {
+    goto('/about');
+  }
 
   let email: string;
   let password: string;
@@ -10,11 +14,7 @@
 
   const login = () => {
     signInWithEmailAndPassword(firebaseAuth, email, password)
-      .then((userCredential) => {
-        $authUser = {
-          uid: userCredential.user.uid,
-          email: userCredential.user.email || ''
-        };
+      .then(() => {
         goto('/about');
       })
       .catch((error) => {
@@ -34,6 +34,24 @@
 
         <input type="password" placeholder="Password" class="px-4 py-2 border border-gray-300 rounded-md" required bind:value={password}/>
         
-        <button type="submit" class="default-action">Login</button>
+        <button type="submit" id="test" class="default-action">Login</button>
       </form>
   </div>
+
+  <style>
+    .default-action {
+      cursor: pointer;
+      border: 0;
+      border-radius: 4px;
+      font-weight: 600;
+      margin: 0 10px;
+      margin-top: 15px;
+      width: 200px;
+      padding: 10px 0;
+      box-shadow: 0 0 20px rgba(104, 85, 224, 0.2);
+      transition: 0.4s;
+      color: rgb(104, 85, 224);
+      background-color: rgba(255, 255, 255, 1);
+      border: 1px solid rgba(104, 85, 224, 1);
+    }
+  </style>

@@ -1,16 +1,16 @@
-// src/routes/about/+page.ts
+// src/routes/explore/+page.ts
 
-import { authUser } from '$lib/authStore';
 import { redirect } from '@sveltejs/kit';
+import session from '$lib/session';
+
 
 export const load = async () => {
-  const unsubscribe = authUser.subscribe((user) => {
-    if (!user) {
+  session.subscribe((value) => {
+    console.log("Check:" + value.user?.email);
+    if (value.user?.email === undefined || value.user?.email === null) {
       throw redirect(302, '/login');
     }
-  });
-
-  unsubscribe();
-
-  return {};
+  })
+  
+    return {};
 };
