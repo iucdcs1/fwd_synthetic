@@ -1,3 +1,5 @@
+<!-- aka Items collection list page -->
+
 <script lang="ts">
 	import type { TableData } from '$lib/interface';
 	import type { FetchResult, FetchError } from './interfaces';
