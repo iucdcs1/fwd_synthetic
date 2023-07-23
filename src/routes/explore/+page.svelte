@@ -1,16 +1,103 @@
 <!-- aka Items collection list page -->
 
 <script lang="ts">
-	import type { TableData } from '$lib/interface';
-	import type { FetchResult, FetchError } from './interfaces';
-	export let data: FetchResult | FetchError;
+	import { appState } from '$lib/state';
+	import type { TableData, AppState, Column } from '$lib/interface';
+	import type { FetchError } from './interfaces';
+	import { onDestroy } from 'svelte';
+	import { goto } from '$app/navigation';
+	export let data: AppState | FetchError;
+
+	if ('dbLink' in data) {
+		// Update the selected_table value in the appState
+		appState.update((currentState) => {
+			const updatedTables = [];
+
+			if (!('dbLink' in data)) throw 'sus';
+
+			// Remove redundant tables
+			const newDataTables = data.tables.map((table) => table.table_name);
+			const existingDataTables = currentState.tables.map((table) => table.table_name);
+			const removedTables = currentState.tables.filter(
+				(table) => !newDataTables.includes(table.table_name)
+			);
+			updatedTables.push(...currentState.tables.filter((table) => !removedTables.includes(table)));
+
+			// Add new tables that are not in appState
+			const newTables = data.tables.filter(
+				(table) => !existingDataTables.includes(table.table_name)
+			);
+			updatedTables.push(...newTables);
+
+			// Update existing tables
+			for (const table of currentState.tables) {
+				const newTable = data.tables.find((t) => t.table_name === table.table_name);
+				if (newTable) {
+					// Remove redundant columns
+					const newColumns = Object.keys(newTable.columns);
+					const existingColumns = Object.keys(table.columns);
+					const removedColumns = Object.keys(table.columns).filter(
+						(col) => !newColumns.includes(col)
+					);
+
+					const updatedColumns = Object.entries(table.columns)
+						.filter(([colName]) => !removedColumns.includes(colName))
+						.reduce<{ [key: string]: Column }>((acc, [colName, column]) => {
+							const newColumn = newTable.columns[colName];
+							if (newColumn) {
+								// Rewrite everything except for generator
+								const updatedColumn = {
+									...column,
+									column_default: newColumn.column_default,
+									data_type: newColumn.data_type,
+									is_nullable: newColumn.is_nullable,
+									character_maximum_length: newColumn.character_maximum_length,
+									is_generated: newColumn.is_generated,
+									related_to: newColumn.related_to
+								};
+								acc[colName] = updatedColumn;
+							}
+							return acc;
+						}, {});
+
+					// Add columns that are not present
+					for (const colName of newColumns) {
+						if (!existingColumns.includes(colName)) {
+							updatedColumns[colName] = newTable.columns[colName];
+						}
+					}
+
+					const updatedTable = {
+						...table,
+						columns: updatedColumns
+					};
+
+					updatedTables.push(updatedTable);
+				}
+			}
+
+			return { ...currentState, tables: updatedTables };
+		});
+	}
 
 	let selectedTableName = '';
+	const unsubscribe = appState.subscribe((currentState) => {
+		selectedTableName = currentState.selected_table;
+	});
+	onDestroy(() => {
+		unsubscribe();
+	});
+
 	let tableData: TableData | undefined;
 	const handleTableSelect = () => {
 		if ('dbLink' in data) {
 			tableData = data.tables.find((value, index, obj) => value.table_name == selectedTableName);
+			appState.update((currentState) => ({ ...currentState, selected_table: selectedTableName }));
 		}
+	};
+
+	const gotoDetails = async (column_name: string) => {
+		await goto('/details/' + column_name);
 	};
 </script>
 
@@ -39,13 +126,18 @@
 							<th>is_nullable</th>
 							<th>character_maximum_length</th>
 							<th>is_generated</th>
+							<th>is_gen_chosen</th>
 						</tr>
 					</thead>
 					<tbody>
 						{#each Object.values(tableData.columns) as column}
 							<tr>
 								<td>
-									<div><button class="colbtn">{column.column_name}</button></div>
+									<div>
+										<button class="colbtn" on:click={() => gotoDetails(column.column_name)}
+											>{column.column_name}</button
+										>
+									</div>
 								</td>
 								<td>
 									<div>{column.column_default}</div>
@@ -68,6 +160,9 @@
 											</ul>
 										{/each}
 									{/if}
+								</td>
+								<td>
+									<div>{column.generator !== undefined}</div>
 								</td>
 							</tr>
 						{/each}

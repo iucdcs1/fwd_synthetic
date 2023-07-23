@@ -1,8 +1,8 @@
 import { Client } from 'pg';
-import type { FetchResult, FetchError } from './interfaces';
-import type { Column, TableData } from '$lib/interface';
+import type { FetchError } from './interfaces';
+import type { AppState, Column, TableData } from '$lib/interface';
 
-export async function load({ url }): Promise<FetchResult | FetchError> {
+export async function load({ url }): Promise<AppState | FetchError> {
 	const dbLink = url.searchParams.get('dbLink');
 	console.log('Connecting to the database:', dbLink);
 
@@ -15,7 +15,6 @@ export async function load({ url }): Promise<FetchResult | FetchError> {
 	const client = new Client({
 		connectionString: dbLink
 	});
-	let error;
 
 	try {
 		await client.connect();
@@ -28,9 +27,10 @@ export async function load({ url }): Promise<FetchResult | FetchError> {
         `);
 		const tableNames = res.rows.map((row) => row.table_name);
 
-		const args: FetchResult = {
+		const args: AppState = {
 			dbLink: dbLink,
-			tables: []
+			tables: [],
+			selected_table: ''
 		};
 
 		for (const tableName of tableNames) {
@@ -58,7 +58,8 @@ export async function load({ url }): Promise<FetchResult | FetchError> {
 					data_type: columnRow.data_type,
 					is_nullable: columnRow.is_nullable,
 					character_maximum_length: columnRow.character_maximum_length,
-					is_generated: columnRow.is_generated
+					is_generated: columnRow.is_generated,
+					generator: undefined
 				};
 
 				tableData.columns[columnRow.column_name] = column;

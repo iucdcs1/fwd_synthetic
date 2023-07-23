@@ -1,5 +1,11 @@
 // lib/interface.ts
+export interface GeneratorMetadata {
+	name: string; // e.g. regexp/random etc...
+	params: object;
+}
+
 export interface Column {
+	// uml
 	column_name: string;
 	column_default: string | null;
 	data_type: string;
@@ -7,6 +13,9 @@ export interface Column {
 	character_maximum_length: number | null;
 	is_generated: string;
 	related_to?: RelatedColumn[];
+
+	// metadata
+	generator: GeneratorMetadata | undefined;
 }
 
 export interface RelatedColumn {
@@ -19,4 +28,10 @@ export interface TableData {
 	columns: {
 		[key: string]: Column;
 	};
+}
+
+export interface AppState {
+	dbLink: string;
+	tables: TableData[];
+	selected_table: string;
 }

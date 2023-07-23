@@ -1,11 +1,24 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import { navigating } from '$app/stores';
+	import { appState } from '$lib/state';
 
 	let dbLink = '';
 
 	const handleSubmit = async (event: Event) => {
 		event.preventDefault();
+		// Get the current state from the appState store
+		const currentState = $appState;
+
+		// Create a new state object with the updated dbLink
+		const newState = {
+			...currentState,
+			dbLink: dbLink
+		};
+
+		// Update the appState store with the new state
+		appState.set(newState);
+
 		await goto(`/explore?dbLink=${encodeURIComponent(dbLink)}`);
 	};
 </script>
