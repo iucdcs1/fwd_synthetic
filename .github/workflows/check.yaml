@@ -3,7 +3,7 @@ name: npm lint and check
 on:
   push:
     branches:
-      - main
+      - ProjDev
 
 jobs:
   lint_and_check:
