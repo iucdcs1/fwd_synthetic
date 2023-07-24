@@ -1,18 +1,12 @@
 <!-- column generation parameters page -->
 
 <script lang="ts">
-	import { goto, afterNavigate } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import { generators, type GeneratorInfo } from '$lib/generators';
 	import type { Column, TableData } from '$lib/interface';
 	import { appState } from '$lib/state';
 	import type { Fetched } from './interfaces';
 
-	let selectedGeneratorName = '';
-	let selectedGenerator: GeneratorInfo | undefined;
-	const handleSelectedGeneratorChange = () => {
-		selectedGenerator = generators.find((g) => g.name == selectedGeneratorName);
-		inputValues = {};
-	};
 	export let data: Fetched;
 
 	let selected_table_name: undefined | string;
@@ -20,6 +14,13 @@
 	const column_name = data.slug;
 	let column: undefined | Column;
 	let matchedGenerators: undefined | GeneratorInfo[];
+
+	let selectedGeneratorName = '';
+	let selectedGenerator: GeneratorInfo | undefined;
+	const handleSelectedGeneratorChange = () => {
+		selectedGenerator = generators.find((g) => g.name == selectedGeneratorName);
+		inputValues = {};
+	};
 
 	const lambda = () => {
 		selected_table_name = $appState.selected_table;
@@ -31,6 +32,9 @@
 		matchedGenerators = generators.filter((g) => {
 			return g.types.includes(column!.data_type);
 		});
+
+		selectedGeneratorName = column.generator !== undefined ? column.generator.name : '';
+		selectedGenerator = generators.find((g) => g.name == selectedGeneratorName);
 	};
 	lambda();
 
