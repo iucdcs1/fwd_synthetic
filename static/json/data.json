@@ -1,8 +1,3 @@
 {
-    "tableName": [
-      "orders",
-      "products",
-      "categories",
-      "users"
-    ]
+	"tableName": ["orders", "products", "categories", "users"]
 }

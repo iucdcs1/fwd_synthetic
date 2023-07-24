@@ -9,7 +9,7 @@ html {
 body {
   margin: 0;
   font-size: 1rem;
-  color: #282A2C;
+  color: #282a2c;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -230,11 +230,11 @@ footer .wave#wave4 {
   /* Modificators */
 }
 .nav__link:after {
-  content: "";
+  content: '';
   display: block;
   width: 0px;
   height: 2px;
-  background-color: #282A2C;
+  background-color: #282a2c;
   position: absolute;
   bottom: -5px;
   left: 0;
@@ -254,7 +254,7 @@ footer .wave#wave4 {
 }
 .nav__link--btn:hover {
   background-color: rgba(255, 255, 255, 0.45);
-  color: #282A2C;
+  color: #282a2c;
 }
 .user {
   display: flex;
@@ -320,9 +320,9 @@ footer .wave#wave4 {
   color: #ff5e62;
   text-align: center;
 }
-input[type=text],
-input[type=email],
-input[type=password] {
+input[type='text'],
+input[type='email'],
+input[type='password'] {
   display: block;
   box-sizing: border-box;
   width: 100%;
@@ -332,7 +332,7 @@ input[type=password] {
   font-size: 14px;
   border-bottom: 1px solid lightgrey;
 }
-input[type=submit] {
+input[type='submit'] {
   width: 100%;
   padding: 15px;
   margin-top: 20px;
@@ -343,7 +343,7 @@ input[type=submit] {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
-input[type=submit]:hover {
+input[type='submit']:hover {
   background-color: #ff9966;
 }
 .gen__form {
@@ -501,6 +501,7 @@ td {
 }
 .slider {
   width: 100%;
+  max-width: 600px;
   text-align: center;
   overflow: hidden;
   position: relative;
@@ -530,9 +531,9 @@ td {
   transform: scale(1);
 }
 .slide__text {
-  font-size: 40px;
-  font-weight: bold;
-  font-family: sans-serif;
+	font-size: 40px;
+	font-weight: bold;
+	font-family: sans-serif;
 }
 .slide a {
   background: none;
@@ -580,6 +581,13 @@ a.slide__next,
   margin-left: -100px;
   /* Center the navigation horizontally */
   text-align: center;
+	box-sizing: border-box;
+	position: absolute;
+	bottom: 5%;
+	left: 50%;
+	width: 200px;
+	margin-left: -100px;
+	text-align: center;
 }
 .slider__navlink {
   display: inline-block;
