@@ -82,7 +82,7 @@
 		});
 
 		// navigate back
-		goto(`/explore?dbLink=${encodeURIComponent($appState.dbLink)}`);
+		goto('/explore');
 	};
 
 	const isBrowser = typeof window !== 'undefined';

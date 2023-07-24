@@ -87,23 +87,15 @@
 	let selectedTableName = '';
 	const unsubscribe = appState.subscribe((currentState) => {
 		selectedTableName = currentState.selected_table;
-		if ('dbLink' in data) {
-			tableData = $appState.tables.find(
-				(value, index, obj) => value.table_name == selectedTableName
-			);
-		}
+		tableData = $appState.tables.find((value, index, obj) => value.table_name == selectedTableName);
 	});
 	onDestroy(() => {
 		unsubscribe();
 	});
 
 	const handleTableSelect = () => {
-		if ('dbLink' in data) {
-			tableData = $appState.tables.find(
-				(value, index, obj) => value.table_name == selectedTableName
-			);
-			appState.update((currentState) => ({ ...currentState, selected_table: selectedTableName }));
-		}
+		tableData = $appState.tables.find((value, index, obj) => value.table_name == selectedTableName);
+		appState.update((currentState) => ({ ...currentState, selected_table: selectedTableName }));
 	};
 
 	const gotoDetails = async (column_name: string) => {
@@ -114,12 +106,12 @@
 <!-- TODO: requires to rename all the home__ entries -->
 <div class="home__form-container">
 	{#if isBrowser}
-		{#if 'dbLink' in data}
+		{#if 'dbLink' in data || data.err === 'dbLink param is not provided'}
 			<div class="home__title">
 				<h2 class="home__tabletext">Table:</h2>
 				<select id="home__listselect" bind:value={selectedTableName} on:change={handleTableSelect}>
 					<option value="">Select a table</option>
-					{#each data.tables as table}
+					{#each $appState.tables as table}
 						<option value={table.table_name}>{table.table_name}</option>
 					{/each}
 				</select>
