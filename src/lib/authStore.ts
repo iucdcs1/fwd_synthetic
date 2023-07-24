@@ -1,8 +1,8 @@
 // $lib/authStore.ts
 
 import { writable, get } from 'svelte/store';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-
+import { onAuthStateChanged } from 'firebase/auth';
+import { firebaseAuth } from './firebase';
 interface AuthUser {
 	uid: string;
 	email: string;
@@ -10,7 +10,6 @@ interface AuthUser {
 
 // Check if the user is authenticated using a session cookie
 const checkAuthStatus = async (): Promise<AuthUser | undefined> => {
-	const firebaseAuth = getAuth();
 	return new Promise((resolve) => {
 		onAuthStateChanged(firebaseAuth, (user) => {
 			if (user) {
