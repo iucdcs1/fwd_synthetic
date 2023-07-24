@@ -88,7 +88,9 @@
 	const unsubscribe = appState.subscribe((currentState) => {
 		selectedTableName = currentState.selected_table;
 		if ('dbLink' in data) {
-			tableData = data.tables.find((value, index, obj) => value.table_name == selectedTableName);
+			tableData = $appState.tables.find(
+				(value, index, obj) => value.table_name == selectedTableName
+			);
 		}
 	});
 	onDestroy(() => {
@@ -97,7 +99,9 @@
 
 	const handleTableSelect = () => {
 		if ('dbLink' in data) {
-			tableData = data.tables.find((value, index, obj) => value.table_name == selectedTableName);
+			tableData = $appState.tables.find(
+				(value, index, obj) => value.table_name == selectedTableName
+			);
 			appState.update((currentState) => ({ ...currentState, selected_table: selectedTableName }));
 		}
 	};
