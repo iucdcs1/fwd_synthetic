@@ -98,8 +98,12 @@
 		appState.update((currentState) => ({ ...currentState, selected_table: selectedTableName }));
 	};
 
-	const gotoDetails = async (column_name: string) => {
-		await goto('/details/' + column_name);
+	const gotoDetails = (column_name: string) => {
+		goto('/details/' + column_name);
+	};
+
+	const gen = () => {
+		goto('/gen/');
 	};
 </script>
 
@@ -175,7 +179,7 @@
 			{:else}
 				<p>No table</p>
 			{/if}
-			<button class="home__button">Gen</button>
+			<button class="home__button" on:click={gen}>Gen</button>
 		{:else}
 			<p>{data.err}</p>
 			<p>{data.detail}</p>

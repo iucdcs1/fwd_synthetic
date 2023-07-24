@@ -43,43 +43,67 @@
 	}
 
 	interface InputValuesMap {
-		[key: string]: string;
+		[key: string]: string | number;
 	}
 
 	let inputValues: InputValuesDOMMap = {};
 
 	const gatherData = () => {
-		// get the values
-		const enteredValues: InputValuesMap = {};
-		for (const argName in inputValues) {
-			if (inputValues[argName] !== null) {
-				enteredValues[argName] = inputValues[argName].value;
-			}
+		if (selectedGenerator !== undefined) {
+			// get the values
+			const enteredValues: InputValuesMap = {};
+			selectedGenerator.args.map((arg) => {
+				if (inputValues[arg.name] !== null) {
+					if (arg.type == 'text') {
+						enteredValues[arg.name] = inputValues[arg.name].value;
+					} else if (arg.type == 'number') {
+						enteredValues[arg.name] = Number(inputValues[arg.name].value);
+					}
+				}
+			});
+
+			// update app state
+			appState.update((currentState) => {
+				// update locally
+				column = {
+					...column!,
+					generator: { name: selectedGeneratorName, params: enteredValues }
+				};
+				let columns = selected_table!.columns;
+				columns[column_name] = column;
+				selected_table = { ...selected_table!, columns: columns };
+
+				// find the table index in the storage
+				let tables = currentState.tables;
+				const index = tables.findIndex((t) => t.table_name == selected_table_name);
+
+				// update the table
+				tables[index] = selected_table;
+
+				return { ...currentState, tables: tables };
+			});
+		} else {
+			// update app state
+			appState.update((currentState) => {
+				// update locally
+				column = {
+					...column!,
+					generator: undefined
+				};
+				let columns = selected_table!.columns;
+				columns[column_name] = column;
+				selected_table = { ...selected_table!, columns: columns };
+
+				// find the table index in the storage
+				let tables = currentState.tables;
+				const index = tables.findIndex((t) => t.table_name == selected_table_name);
+
+				// update the table
+				tables[index] = selected_table;
+
+				return { ...currentState, tables: tables };
+			});
 		}
-
-		// update app state
-		appState.update((currentState) => {
-			// update locally
-			column = {
-				...column!,
-				generator:
-					selectedGeneratorName != ''
-						? { name: selectedGeneratorName, params: enteredValues }
-						: undefined
-			};
-			let columns = selected_table!.columns;
-			columns[column_name] = column;
-			selected_table = { ...selected_table!, columns: columns };
-
-			// find the table index in the storage
-			let tables = currentState.tables;
-			const index = tables.findIndex((t) => t.table_name == selected_table_name);
-
-			// update the table
-			tables[index] = selected_table;
-
-			return { ...currentState, tables: tables };
-		});
 
 		// navigate back
 		goto('/explore');
