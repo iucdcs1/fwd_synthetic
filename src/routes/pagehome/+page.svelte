@@ -12,6 +12,12 @@
 <div class="pagehome__main">
   <div class="pagehome__container1">
     <p class="pagehome__service">About service</p>
+		<p id="about__service">
+			Welcome to our website, where we specialize in generating synthetic data for various
+			industries and applications. Our team of experts is dedicated to providing high-quality
+			synthetic data that can be used for a wide range of purposes, including machine learning, data
+			analysis, and testing.
+		</p>
   </div>
   <div class="pagehome__container2">
     <div class="pagehome__container2header">
