@@ -8,20 +8,21 @@
 	import { goto } from '$app/navigation';
 	export let data: AppState | FetchError;
 
-	if ('dbLink' in data) {
+	const isBrowser = typeof window !== 'undefined';
+	if ('dbLink' in data && isBrowser) {
 		// Update the selected_table value in the appState
 		appState.update((currentState) => {
-			const updatedTables = [];
+			let updatedTables: TableData[] = [];
 
 			if (!('dbLink' in data)) throw 'sus';
 
 			// Remove redundant tables
 			const newDataTables = data.tables.map((table) => table.table_name);
 			const existingDataTables = currentState.tables.map((table) => table.table_name);
-			const removedTables = currentState.tables.filter(
-				(table) => !newDataTables.includes(table.table_name)
+			const removedTables = existingDataTables.filter((item) => !newDataTables.includes(item)); // existingDataTables - newDataTables
+			updatedTables.push(
+				...currentState.tables.filter((table) => !removedTables.includes(table.table_name))
 			);
-			updatedTables.push(...currentState.tables.filter((table) => !removedTables.includes(table)));
 
 			// Add new tables that are not in appState
 			const newTables = data.tables.filter(
@@ -72,7 +73,9 @@
 						columns: updatedColumns
 					};
 
-					updatedTables.push(updatedTable);
+					// replace table
+					let index = updatedTables.findIndex((t) => t.table_name == updatedTable.table_name);
+					updatedTables[index] = updatedTable;
 				}
 			}
 
