@@ -31,6 +31,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"esbuild": "^0.18.16",
 		"firebase": "^10.0.0",
 		"firebaseui": "^6.0.2",
 		"pg": "^8.11.1"
