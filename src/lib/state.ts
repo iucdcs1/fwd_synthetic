@@ -13,7 +13,7 @@ function combineObjects(initial: object, update: object): object {
 		if (key in result) {
 			// i know what im doing
 			// eslint-disable-next-line @typescript-eslint/no-explicit-any
-			(result as any)[key] = (initial as any)[key];
+			(result as any)[key] = (update as any)[key];
 		}
 	}
 
