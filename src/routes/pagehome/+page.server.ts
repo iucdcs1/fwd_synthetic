@@ -41,11 +41,11 @@ app.get('/api/data/:reviewId', async (req, res) => {
 });
 
 app.post('/api/addReview', async (req, res) => {
-	const { name, score, text, short_text } = req.body;
+	const { name, score, text, short_text, email } = req.body;
 	try {
 		const query =
-			'INSERT INTO reviews (name, score, text, short_text) VALUES ($1, $2, $3, $4) RETURNING *';
-		const values = [name, score, text, short_text];
+			'INSERT INTO reviews (name, score, text, short_text, email) VALUES ($1, $2, $3, $4, $5) RETURNING *';
+		const values = [name, score, text, short_text, email];
 		const queryResult = await pool.query(query, values);
 		const newReview = queryResult.rows[0];
 

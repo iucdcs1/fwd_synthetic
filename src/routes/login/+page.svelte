@@ -31,7 +31,7 @@
 					uid: userCredential.user.uid,
 					email: userCredential.user.email || ''
 				};
-				goto('/pagehome');
+				goto('/about');
 			})
 			.catch((error) => {
 				// Handle login error
