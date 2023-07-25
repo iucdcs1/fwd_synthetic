@@ -13,15 +13,15 @@
 		amount: number,
 		columnsGenerators: { [key: string]: GeneratorMetadata }
 	): Promise<void> {
-		// TODO: use normal server
-		await axios.post('http://127.0.0.1:8000/generate', columnsGenerators, {
+		await axios.post('https://ccc9-188-130-155-148.ngrok-free.app/generate', columnsGenerators, {
 			params: {
 				dblink,
 				table,
 				amount
 			},
 			headers: {
-				'Access-Control-Allow-Origin': '*'
+				'Access-Control-Allow-Origin': '*',
+				'ngrok-skip-browser-warning': 'yes'
 			}
 		});
 	}
