@@ -19,9 +19,9 @@
             {#if selectedTableName === "Type"}
                 <select id="filter__dynamic-listselect">
                     <option value="">Select a type</option>
-                    <option>hui</option>
-                    <option>penis</option>
-                    <option>ZaLupA</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
                 </select>
             {/if}
         {/if}
