@@ -1,0 +1,57 @@
+{
+	"table_name": "orders",
+	"columns": {
+		"order_id": {
+			"column_name": "order_id",
+			"column_default": "nextval('orders_order_id_seq'::regclass)",
+			"data_type": "integer",
+			"is_nullable": "NO",
+			"character_maximum_length": null,
+			"is_generated": "NEVER"
+		},
+		"user_id": {
+			"column_name": "user_id",
+			"column_default": null,
+			"data_type": "integer",
+			"is_nullable": "YES",
+			"character_maximum_length": null,
+			"is_generated": "NEVER",
+			"connected_with": [
+				{
+					"table_name": "users",
+					"column_name": "user_id"
+				}
+			]
+		},
+		"product_id": {
+			"column_name": "product_id",
+			"column_default": null,
+			"data_type": "integer",
+			"is_nullable": "YES",
+			"character_maximum_length": null,
+			"is_generated": "NEVER",
+			"connected_with": [
+				{
+					"table_name": "products",
+					"column_name": "product_id"
+				}
+			]
+		},
+		"quantity": {
+			"column_name": "quantity",
+			"column_default": null,
+			"data_type": "integer",
+			"is_nullable": "NO",
+			"character_maximum_length": null,
+			"is_generated": "NEVER"
+		},
+		"order_date": {
+			"column_name": "order_date",
+			"column_default": null,
+			"data_type": "date",
+			"is_nullable": "NO",
+			"character_maximum_length": null,
+			"is_generated": "NEVER"
+		}
+	}
+}
