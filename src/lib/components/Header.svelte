@@ -19,6 +19,7 @@
 	};
 </script>
 
+<link rel="stylesheet" href="../css/style.css" />
 <header class="header">
 	<div class="container">
 		<div class="header__inner">

@@ -28,14 +28,14 @@
 		<div class="slider-container">
 			<div class="slider">
 				<div class="slides">
-					{#each data.items as review}
+					{#each data.reviews as review}
 						<div id="slides__{review.number}" class="slide">
 							<div class="slides__alltext">
 								<div class="slide__header">
 									<h3 class="slide__name">{review.name}</h3>
 									<p class="slide__grade">{review.score}/5</p>
 								</div>
-								<a class="slide__button slides__text" href={'/pagehome/' + review.name}
+								<a class="slide__button slides__text" href={'/pagehome/' + review.number}
 									><p class="slide__name" style="font-size: 18px;">{review.short_text}</p></a
 								>
 							</div>
