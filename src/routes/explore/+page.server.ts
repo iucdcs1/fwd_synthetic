@@ -8,7 +8,7 @@ export async function load({ url }): Promise<AppState | FetchError> {
 
 	if (dbLink === null)
 		return {
-			err: 'dbLink param is required',
+			err: 'dbLink param is not provided',
 			detail: ''
 		};
 

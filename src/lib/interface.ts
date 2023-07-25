@@ -1,7 +1,9 @@
 // lib/interface.ts
 export interface GeneratorMetadata {
 	name: string; // e.g. regexp/random etc...
-	params: object;
+	params: {
+		[key: string]: string | number;
+	};
 }
 
 export interface Column {

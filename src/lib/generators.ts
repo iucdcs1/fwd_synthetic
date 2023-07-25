@@ -13,14 +13,14 @@ export const generators: GeneratorInfo[] = [
 	{
 		name: 'regexp',
 		types: ['character varying', 'text'],
-		args: [{ name: 'regexp', type: 'str' }]
+		args: [{ name: 'RegExp', type: 'text' }]
 	},
 	{
 		name: 'random',
 		types: ['integer', 'numeric'],
 		args: [
-			{ name: 'from', type: 'num' },
-			{ name: 'to', type: 'num' }
+			{ name: 'From', type: 'number' },
+			{ name: 'To', type: 'number' }
 		]
 	}
 ];
