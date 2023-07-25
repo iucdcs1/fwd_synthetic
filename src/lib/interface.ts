@@ -2,7 +2,7 @@
 export interface GeneratorMetadata {
 	name: string; // e.g. regexp/random etc...
 	params: {
-		[key: string]: string;
+		[key: string]: string | number;
 	};
 }
 
