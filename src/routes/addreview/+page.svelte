@@ -17,6 +17,7 @@
 			<option value="grade__5">5</option>
 		  </select>
 		</div>
+		<input type="text" placeholder="Short text"/>
 		<input type="text" placeholder="Review"/>
 		<button type="submit" id="add" class="addreview__submit">Submit</button>
 	</form>
