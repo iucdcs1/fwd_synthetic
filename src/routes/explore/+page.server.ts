@@ -1,4 +1,5 @@
-import { Client } from 'pg';
+import pkg from 'pg';
+const { Client } = pkg;
 import type { FetchError } from './interfaces';
 import type { AppState, Column, TableData } from '$lib/interface';
 

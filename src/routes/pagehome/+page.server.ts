@@ -1,4 +1,5 @@
-import { Pool } from 'pg';
+import pkg from 'pg';
+const { Pool } = pkg;
 import express from 'express';
 import cors from 'cors';
 import bodyParser from 'body-parser';
