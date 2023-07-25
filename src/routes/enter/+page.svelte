@@ -1,4 +1,14 @@
 <script lang="ts">
+	import { authUser } from '$lib/authStore';
+
+	export async function load() {
+		const user = $authUser;
+		if (!user) {
+			return { status: 302, redirect: '/login' };
+		}
+		return { props: { user } };
+	}
+
 	import { goto } from '$app/navigation';
 	import { navigating } from '$app/stores';
 	import { appState } from '$lib/state';
